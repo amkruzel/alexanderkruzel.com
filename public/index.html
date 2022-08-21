@@ -10,7 +10,7 @@
     type="text/css"
   />
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" async></script>
+  <script src="script.js" async type="module"></script>
 
   <title>Alexander Kruzel</title>
   
@@ -19,27 +19,52 @@
   <header>
     <h1>Alexander Kruzel</h1>
   </header>
-  
-  <script type="module">
+  <div class="content">
+    <div class="music-container">
+      <div class="title">
+        Nachtwanderer
+      </div>
+      <div class="composer">
+        Fanny Mendelssohn Hensel
+      </div>
+      <div class="media">
 
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCquEX_gZWRdC2wriLApLM8BA83MzLV8YE",
-      authDomain: "personal-site-a4587.firebaseapp.com",
-      projectId: "personal-site-a4587",
-      storageBucket: "personal-site-a4587.appspot.com",
-      messagingSenderId: "937088829561",
-      appId: "1:937088829561:web:82c552ada29fdb3f436ca8"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    
-  </script>
+      </div>
+      <div class="details">
+        <audio controls id="mendelssohn">
+        </audio>
+      </div>
+    </div>
+    <div class="music-container">
+      <div class="title">
+        An die Entfernte
+      </div>
+      <div class="composer">
+        Josephine Lang
+      </div>
+      <div class="media">
+
+      </div>
+      <div class="details">
+        <audio controls id="lang">
+        </audio>
+      </div>
+    </div>
+    <div class="music-container">
+      <div class="title">
+        Trois Chansons
+      </div>
+      <div class="composer">
+        Claude Debussy
+      </div>
+      <div class="media">
+
+      </div>
+      <div class="details">
+        <audio controls id="debussy">
+        </audio>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
