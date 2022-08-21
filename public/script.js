@@ -1,5 +1,11 @@
-import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js"
+import { 
+  getDownloadURL,
+  getStorage, 
+  ref,  
+} from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js"
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+import { getFirestore, collection, doc, getDocs, documentId }  from "https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,14 +19,13 @@ const firebaseConfig = {
   appId: "1:937088829561:web:82c552ada29fdb3f436ca8"
 };
 
-function createMusicContainer(title, composer, url) {
-  const musicContainer = document.createElement
-}
-
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
+const query = await getDocs(collection(db, "music"))
 const storage = getStorage(app)
+
+const content = document.querySelector('.content')
 
 getDownloadURL(ref(storage, 'music/Nachtwanderer (Mendelssohn Hensel).wav'))
   .then((url) => {
@@ -56,5 +61,55 @@ getDownloadURL(ref(storage, 'music/2018DebussyQuartet.mp3'))
   })
   .catch((error) => {
     // Handle any errors
-});
+})
+
+function newElement(type, ...classes) {
+  let el = document.createElement(type)
+  classes.forEach(cl => {
+    el.classList.add(cl)
+  })
+  return el
+}
+
+// grid in music container is all messed up - not even using media div?
+
+function makeMusicBox(doc) {
+  let musicContainer = newElement('div', 'music-container')
+  let titleContainer = newElement('div', 'title')
+  let composerContainer = newElement('div', 'composer')
+  let miscContainer = newElement('div')
+  let audioContainer = newElement('div', 'details')
+
+  let audioEl = newElement('audio')
   
+  audioEl.controls = true
+  // audioEl.dataset.id = doc.id
+
+  let docData = doc.data()
+
+  getDownloadURL(ref(storage, `music/${docData.filepath}`))
+    .then(url => {
+      audioEl.setAttribute('src', url)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  
+  titleContainer.textContent = docData.title
+  composerContainer.textContent = docData.composer
+
+  audioContainer.append(audioEl)
+
+  musicContainer.append(
+    titleContainer,
+    composerContainer,
+    miscContainer,
+    audioContainer
+  )
+
+  content.appendChild(musicContainer)
+}
+
+query.forEach(doc => {
+  makeMusicBox(doc)
+})
