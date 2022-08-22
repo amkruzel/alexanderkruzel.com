@@ -4,8 +4,12 @@
 // Complete documentation here - https://firebase.google.com/docs/web/setup#available-libraries
 
 import { initializeApp }                     from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js'
-import { getDownloadURL, getStorage, ref }   from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js'
+import { getStorage, getDownloadURL, ref }   from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js'
 import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
+
+// Other imports from local js files
+
+import { newElement } from './helperFunctions.js'
 
 // This app's Firebase configuration
 const firebaseConfig = {
@@ -28,18 +32,7 @@ const storage = getStorage(app)
 
 const allMusicArr = await getDocs(collection(db, AudioDir))
 
-// Helper functions
-function newElement(type, ...classes) {
-  const el = document.createElement(type)
-  classes.forEach(cl => {
-    el.classList.add(cl)
-  })
-  return el
-}
-
-// grid in music container is all messed up - not even using media div?
-
-function makeMusicBox(doc) {
+const makeSongContainer = song => {
   const musicContainer    = newElement('div', 'music-container')
   const titleContainer    = newElement('div', 'title')
   const composerContainer = newElement('div', 'composer')
@@ -50,18 +43,18 @@ function makeMusicBox(doc) {
   
   audioEl.controls = true
 
-  const docData = doc.data()
+  const songData = song.data()
 
-  getDownloadURL(ref(storage, `${AudioDir}/${docData.filepath}`))
+  getDownloadURL(ref(storage, `${AudioDir}/${songData.filepath}`))
     .then(url => {
       audioEl.setAttribute('src', url)
     })
     .catch(err => {
-      console.log(err)
+      console.log(err) // TODO
     })
   
-  titleContainer.textContent    = docData.title
-  composerContainer.textContent = docData.composer
+  titleContainer.textContent    = songData.title
+  composerContainer.textContent = songData.composer
 
   audioContainer.append(audioEl)
   musicContainer.append(
@@ -70,7 +63,10 @@ function makeMusicBox(doc) {
     miscContainer,
     audioContainer
   )
+
   Content.appendChild(musicContainer)
 }
 
-allMusicArr.forEach(doc => { makeMusicBox(doc) })
+// grid in music container is all messed up - not even using media div?
+
+allMusicArr.forEach(song => { makeSongContainer(song) })
