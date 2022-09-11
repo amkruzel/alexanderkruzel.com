@@ -181,7 +181,7 @@ const makeSongContainer = (song) => {
 
   getDownloadURL(ref(storage, `${AudioDir}/${filepath}`))
     .then(url => {
-      //audio.src = url
+      audio.src = url
     })
     .catch(err => {
       console.log(err) // TODO
