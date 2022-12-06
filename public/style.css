@@ -216,7 +216,7 @@ h1 {
   height: calc(100% + 4px);
   left: -2px;
   top: -2px;
-  background: #d17a22;
+  background: black;
   z-index: -1;
 }
 
