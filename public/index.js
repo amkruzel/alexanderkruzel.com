@@ -11,6 +11,11 @@ import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/fireb
 
 import { newElement } from './helperFunctions.js'
 
+// Other local js imports
+
+import { makeProjectsSection } from './scripts/projects.js'
+import { makeContactSection }  from './scripts/contact.js'
+
 // Other imports
 
 import lottieWeb from 'https://cdn.skypack.dev/lottie-web'
@@ -53,10 +58,10 @@ const Content  = document.querySelector('.content')
 const navUl    = document.querySelector('.nav-ul')
 const navItems = document.querySelectorAll('.nav-item')
 
-const homeSection  = newElement('div', 'home-section')
-const musicSection = newElement('div', 'music-section', 'hidden')
-const projectsSection = newElement('div', 'projects-section', 'coming-soon', 'hidden')
-const contactSection = newElement('div', 'contact-section', 'coming-soon', 'hidden')
+const homeSection     = newElement('div', 'home-section')
+const musicSection    = newElement('div', 'music-section', 'hidden')
+const projectsSection = newElement('div', 'projects-section', 'hidden')
+const contactSection  = newElement('div', 'contact-section', 'coming-soon', 'hidden')
 
 Content.append(
   homeSection,
@@ -83,7 +88,8 @@ const makeHomeSection = () => {
 
   getDownloadURL(ref(storage, `media/home-img.jpg`))
     .then(url => {
-      img.src = url
+      // uncomment this line to load image
+      // img.src = url
     })
     .catch(err => {
       console.log(err) // TODO
@@ -120,23 +126,9 @@ const makeGenreSection = (genre) => {
   return genreSection
 }
 
-const makeProjectsSection = () => {
-  const projContainer = newElement('div')
-  projContainer.innerHTML = '// projects // <br><br>coming soon...'
-
-  return projContainer
-}
-
 projectsSection.append(
   makeProjectsSection()
 )
-
-const makeContactSection = () => {
-  const contactContainer = newElement('div')
-  contactContainer.innerHTML = '// contact // <br><br>coming soon...'
-
-  return contactContainer
-}
 
 contactSection.append(
   makeContactSection()
@@ -181,7 +173,7 @@ const makeSongContainer = (song) => {
 
   getDownloadURL(ref(storage, `${AudioDir}/${filepath}`))
     .then(url => {
-      audio.src = url
+      //audio.src = url
     })
     .catch(err => {
       console.log(err) // TODO
@@ -555,25 +547,28 @@ navUl.addEventListener('click', function(e) {
 
   if (itemText === PageState.text) return
 
-  PageState.DOM.classList.toggle('hidden')
   PageState.text = itemText
 
   if (itemText === 'music') {
+    PageState.DOM.classList.toggle('hidden')
     musicSection.classList.toggle('hidden')
     PageState.DOM = musicSection
   }
 
   if (itemText === 'home') {
+    PageState.DOM.classList.toggle('hidden')
     homeSection.classList.toggle('hidden')
     PageState.DOM = homeSection
   }
 
   if (itemText === 'projects') {
+    PageState.DOM.classList.toggle('hidden')
     projectsSection.classList.toggle('hidden')
     PageState.DOM = projectsSection
   }
 
   if (itemText === 'contact') {
+    PageState.DOM.classList.toggle('hidden')
     contactSection.classList.toggle('hidden')
     PageState.DOM = contactSection
   }

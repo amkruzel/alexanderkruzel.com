@@ -37,6 +37,12 @@ header {
   border-bottom: 1px black solid;
 }
 
+
+a {
+  text-decoration: none;
+  color: #00537a;
+}
+
 nav > ul {
   list-style: none;
   display: grid;
@@ -67,7 +73,7 @@ h1 {
 }
 
 .content {
-  margin: 30px;
+  padding: 0px 30px 0 30px;
   display: grid;
 }
 
@@ -109,7 +115,7 @@ h1 {
   justify-items: center;
 }
 
-.songs-section-header {
+.songs-section-header{
   width: 1000px;
   font-size: 32px;
   text-align: left;
@@ -259,4 +265,54 @@ output {
 
 .mute-icon {
   margin-left: 4px;
+}
+
+/* Generic section stuff */
+
+.section-header {
+  width: 1000px;
+  font-size: 32px;
+  text-align: left;
+  border-bottom: 1px solid black;
+  padding: 6px 20px;
+}
+
+.section-container{
+  display: grid;
+  justify-items: center;
+  gap: 25px;
+  padding-bottom: 50px;
+}
+
+.proj-section {
+  width: 950px;
+  gap: 3px;
+  padding-left: 40px;
+  display: grid;
+  justify-items: center;
+  text-align: left;
+}
+
+.proj-section-header {
+  width: 100%;
+  font-size: 20px;
+  text-align: left;
+  padding-bottom: 8px;
+}
+
+.proj-item {
+  border-bottom: 1px solid grey;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 150px 60px 60px 100px;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  padding: 8px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.contact-link {
+  font-size: 18px;
+  justify-self: start;
 }
