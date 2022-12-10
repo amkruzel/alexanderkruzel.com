@@ -89,7 +89,7 @@ const makeHomeSection = () => {
   getDownloadURL(ref(storage, `media/home-img.jpg`))
     .then(url => {
       // uncomment this line to load image
-      // img.src = url
+      img.src = url
     })
     .catch(err => {
       console.log(err) // TODO
@@ -173,7 +173,7 @@ const makeSongContainer = (song) => {
 
   getDownloadURL(ref(storage, `${AudioDir}/${filepath}`))
     .then(url => {
-      //audio.src = url
+      audio.src = url
     })
     .catch(err => {
       console.log(err) // TODO
