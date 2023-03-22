@@ -22,6 +22,11 @@ const makeProjectsSection = () => {
   funcHeader.textContent   = 'Functional Programming'
   //miscHeader.textContent   = 'Other'
 
+  const playChess = createOneProject(
+    'Play Chess', 
+    'https://github.com/amkruzel/playchess',
+    'https://playchess.page')
+
   const toDoList = createOneProject(
     'To-Do List', 
     'https://github.com/amkruzel/todo-list',
@@ -52,6 +57,7 @@ const makeProjectsSection = () => {
   )
 
   webDevSection.append(
+    playChess,
     webDevHeader,
     toDoList,
     adminDashboard)
