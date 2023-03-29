@@ -57,8 +57,8 @@ const makeProjectsSection = () => {
   )
 
   webDevSection.append(
-    playChess,
     webDevHeader,
+    playChess,
     toDoList,
     adminDashboard)
 
